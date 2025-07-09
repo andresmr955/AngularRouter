@@ -16,10 +16,11 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { TimeInterceptor } from './interceptors/time.interceptor';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { HomeComponent } from './pages/home/home.component';
-
+import { CategoryComponent } from './pages/category/category.component';
 @NgModule({
   declarations: [
     AppComponent,
+    ProductsComponent,
     ImgComponent,
     ProductComponent,
     NavComponent,
@@ -27,7 +28,7 @@ import { HomeComponent } from './pages/home/home.component';
     TimeAgoPipe,
     HighlightDirective,
     HomeComponent,
-    ProductsComponent
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +41,7 @@ import { HomeComponent } from './pages/home/home.component';
     { provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
+  exports: [ProductsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
