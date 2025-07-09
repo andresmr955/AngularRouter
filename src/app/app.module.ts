@@ -22,12 +22,12 @@ import { HomeComponent } from './pages/home/home.component';
     AppComponent,
     ImgComponent,
     ProductComponent,
-    ProductsComponent,
     NavComponent,
     ReversePipe,
     TimeAgoPipe,
     HighlightDirective,
-    HomeComponent
+    HomeComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
