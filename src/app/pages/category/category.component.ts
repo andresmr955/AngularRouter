@@ -34,11 +34,9 @@ export class CategoryComponent {
       return [];
       })
     )
-        .subscribe(data => {
-          this.products = data
-        });
-      
-    }
-    
+    .subscribe(data => {
+      this.products = data
+    });
+  }
   
 }

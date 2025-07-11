@@ -62,11 +62,16 @@ export class ProductsComponent{
     const product: CreateProductDTO = {
       title: 'Nuevo prodcuto',
       description: 'bla bla bla',
-      images: [`https://placeimg.com/640/480/any?random=${Math.random()}`],
+      images: [`https://picsum.photos/200`, 
+              `https://picsum.photos/200`,
+              `https://picsum.photos/200`
+      ],
       price: 1000,
       categoryId: 2,
     };
-    this.productsService.create(product).subscribe((data) => {
+    this.productsService.create(product)
+    .subscribe(data => {
+      console.log('created', data)
       this.products.unshift(data);
     });
   }
