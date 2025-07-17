@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from '../../services/store.service'
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
+import { TokenService } from './../../services/token.service';
 
 @Component({
   selector: 'app-nav',
@@ -13,11 +14,13 @@ export class NavComponent implements OnInit {
 
   activeMenu = false;
   counter = 0;
+  token =  '';
   profile: User | null = null;
 
   constructor(
     private storeService: StoreService,
     private authService: AuthService,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +37,10 @@ export class NavComponent implements OnInit {
     this.authService.loginAndGet('john@mail.com', 'changeme')
     .subscribe(user => {
       this.profile = user;
+      
+      const token = this.tokenService.getToken();
+      console.log('Perfil de usuario:', user);
+      console.log('Token de acceso:', token);
     });
   }
 

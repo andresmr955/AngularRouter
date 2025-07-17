@@ -18,10 +18,7 @@ export class HomeComponent {
 
   }
     ngOnInit(): void {
-    this.productsService.getAll(10, 0).subscribe((data) => {
-      this.products = data;
-      this.offset += this.limit;
-    });
+    this.onLoadMore();
   }
 
   onLoadMore() {

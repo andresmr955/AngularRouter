@@ -29,9 +29,11 @@ export class ProductsService {
   }
   getAll(limit?: number, offset?: number) {
     let params = new HttpParams();
-    if (limit && offset) {
-      params = params.set('limit', limit);
-      params = params.set('offset', limit);
+    if (limit !== undefined) {
+    params = params.set('limit', limit.toString());
+    }
+    if (offset !== undefined) {
+      params = params.set('offset', offset.toString());
     }
     return this.http.get<Product[]>(`${this.apiUrl}/products`, { params, context: checkTime() })
     .pipe(
@@ -70,6 +72,11 @@ export class ProductsService {
     )
   }
 
+  getProductsByPage(limit: number, offset:number){
+    return this.http.get<Product[]>(`${this.apiUrl}/products`, {params: { limit, offset }
+    })
+  }
+
   create(dto: CreateProductDTO) {
     return this.http.post<Product>(`${this.apiUrl}/products`, dto);
   }
@@ -77,6 +84,7 @@ export class ProductsService {
   update(id: string, dto: UpdateProductDTO) {
     return this.http.put<Product>(`${this.apiUrl}/products/${id}`, dto);
   }
+  
 
   delete(id: string) {
     return this.http.delete<boolean>(`${this.apiUrl}/products/${id}`);
