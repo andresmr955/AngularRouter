@@ -47,29 +47,34 @@ export class NavComponent implements OnInit {
     });
   }
 
-  downloadPdf(fileURL?: string){
-    if(fileURL){
-          console.log('file provided')
-          this.fileService.getFile("myPdf", fileURL, 'application/pdf').subscribe()
-    }else {
-    console.log('no file provided');
-    this.fileService.getFile("myPdf", 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/examples/learning/helloworld.pdf', 'application/pdf').subscribe();
-  }
-  }
+  downloadPdf() {
+  if (this.imgRta) {
+    const filename = this.imgRta.split('/').pop() || 'file'; // extrae el nombre del archivo de la URL
+    let mimeType = 'application/octet-stream'; // fallback
 
-  onUpload(event: Event){
-    const element = event.target as HTMLInputElement
-    const file = element.files?.item(0);
+    if (filename.endsWith('.pdf')) mimeType = 'application/pdf';
+    else if (filename.endsWith('.png')) mimeType = 'image/png';
+    else if (filename.endsWith('.jpg') || filename.endsWith('.jpeg')) mimeType = 'image/jpeg';
 
-    if (file){
-          this.fileService.uploadFile(file)
-        .subscribe( rta => {
-              this.imgRta = rta.location;
-              console.log('aqui iria una imagen', this.imgRta)
-              this.downloadPdf(this.imgRta);
-            })
+    this.fileService.getFile(filename, this.imgRta, mimeType).subscribe();
+    return;
+  } else {
+    this.fileService.getFile('helloworld.pdf', 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/examples/learning/helloworld.pdf', 'application/pdf').subscribe();
   }
-    }
-    
+}
+
+  onUpload(event: Event) {
+  const element = event.target as HTMLInputElement;
+  const file = element.files?.item(0);
+
+  if (file) {
+    this.fileService.uploadFile(file).subscribe({
+      next: (rta) => {
+        console.log('Respuesta del backend:', rta);
+        this.imgRta = rta.location;
+      }
+    });
+  }
+}
 
 }

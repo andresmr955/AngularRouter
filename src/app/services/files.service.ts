@@ -11,7 +11,7 @@ import { FileRta } from './../models/files.model';
 })
 export class FilesService {
 
-  private apiUrl = `${environment.API_URL}/api/files`;
+  private apiUrl = `http://127.0.0.1:8000/uploadAPI/`;
 
   constructor(
     private http: HttpClient
@@ -31,6 +31,6 @@ export class FilesService {
   uploadFile(file: Blob) {
     const dto = new FormData();
     dto.append('file', file);
-    return this.http.post<FileRta>(`http://127.0.0.1:8000/uploadAPI/`, dto)
+    return this.http.post<FileRta>(this.apiUrl, dto)
   }
 }
