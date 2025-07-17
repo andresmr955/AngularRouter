@@ -40,6 +40,10 @@
         <button *ngIf="!profile; else elseBlock" (click)="login()">Login</button>
         <ng-template #elseBlock>{{ profile?.email }}</ng-template>
       </div>
+      <div class="download">
+        <button  (click)="downloadPdf()">download PDF</button>
+    
+      </div>
       <app-register></app-register>
       <div class="cart">
         <a href="">

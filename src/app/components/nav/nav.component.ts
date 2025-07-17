@@ -4,6 +4,7 @@ import { StoreService } from '../../services/store.service'
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { TokenService } from './../../services/token.service';
+import { FilesService } from 'src/app/services/files.service';
 
 @Component({
   selector: 'app-nav',
@@ -20,7 +21,8 @@ export class NavComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private authService: AuthService,
-    private tokenService: TokenService
+    private tokenService: TokenService, 
+    private fileService: FilesService
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +44,10 @@ export class NavComponent implements OnInit {
       console.log('Perfil de usuario:', user);
       console.log('Token de acceso:', token);
     });
+  }
+
+  downloadPdf(){
+    this.fileService.getFile("myPdf", 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/examples/learning/helloworld.pdf', 'application/pdf').subscribe()
   }
 
 }
