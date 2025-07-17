@@ -41,7 +41,13 @@
         <ng-template #elseBlock>{{ profile?.email }}</ng-template>
       </div>
       <div class="download">
-        <button  (click)="downloadPdf()">download PDF</button>
+        <p>
+          <button  (click)="downloadPdf()">download PDF</button>
+        </p>
+        <p>
+          <input type="file" (change)="onUpload($event)">
+          <img *ngIf="imgRta" [src]="imgRta">
+        </p>
     
       </div>
       <app-register></app-register>

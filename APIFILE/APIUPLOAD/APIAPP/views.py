@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files.base import ContentFile
 import uuid
+from django.conf import settings
 
 def upload_file(request):
     if request.method == 'POST':
@@ -35,11 +36,8 @@ class PDFParser(BaseParser):
 
 class FileUploadView(APIView):
     
-
     parser_classes= [MultiPartParser, FormParser, PDFParser]
     
-    
-
     def post(self, request, *args, **kwargs):
         content_type = request.content_type
 
@@ -54,15 +52,26 @@ class FileUploadView(APIView):
 
             serializer = UploadedFileSerializer(data={'file': django_file})
             if serializer.is_valid():
-                serializer.save()
-                return Response({'message': 'PDF binario recibido y guardado'}, status=201)
+                uploaded_file = serializer.save()
+                relative_path = uploaded_file.file.name
+
+                file_url = request.build_absolute_uri(settings.MEDIA_URL + relative_path)
+                return Response({'message': 'PDF binario recibido y guardado', 'location': file_url}, status=201)
             return Response(serializer.errors, status=400)
 
         else:
             serializer = UploadedFileSerializer(data=request.data)
             if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+                uploaded_file = serializer.save()
+                relative_path = uploaded_file.file.name
+
+                file_url = request.build_absolute_uri(settings.MEDIA_URL + relative_path)
+                return Response(
+                    {   'location': file_url,
+                        'data': serializer.data
+                    }, 
+                    status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     

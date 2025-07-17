@@ -31,6 +31,6 @@ export class FilesService {
   uploadFile(file: Blob) {
     const dto = new FormData();
     dto.append('file', file);
-    return this.http.post<FileRta>(`${this.apiUrl}/upload`, dto)
+    return this.http.post<FileRta>(`http://127.0.0.1:8000/uploadAPI/`, dto)
   }
 }
