@@ -5,7 +5,8 @@ import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { TokenService } from './../../services/token.service';
 import { FilesService } from 'src/app/services/files.service';
-
+import { CategoriesService } from './../../services/categories.service';
+import { Category } from 'src/app/models/category.model';
 
 @Component({
   selector: 'app-nav',
@@ -19,17 +20,21 @@ export class NavComponent implements OnInit {
   token =  '';
   profile: User | null = null;
   imgRta = ''
+  categories: Category[] = [];
+
   constructor(
     private storeService: StoreService,
     private authService: AuthService,
     private tokenService: TokenService, 
-    private fileService: FilesService
+    private fileService: FilesService, 
+    private categoriesService: CategoriesService
   ) { }
 
   ngOnInit(): void {
     this.storeService.myCart$.subscribe(products => {
       this.counter = products.length;
     });
+    this.getAllCategories();
   }
 
   toggleMenu() {
@@ -76,5 +81,11 @@ export class NavComponent implements OnInit {
     });
   }
 }
-
+    getAllCategories(){
+      this.categoriesService.getAll()
+      .subscribe(data => {
+        this.categories = data;
+        console.log(this.categories)
+      });
+    } 
 }

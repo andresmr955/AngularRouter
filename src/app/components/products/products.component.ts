@@ -24,6 +24,7 @@ export class ProductsComponent{
   productChosen: Product | null = null;
  
   statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
+  imageRandom = `https://picsum.photos/200?random=${Math.floor(Math.random() * 1000)}`;
 
   constructor(
     private storeService: StoreService,

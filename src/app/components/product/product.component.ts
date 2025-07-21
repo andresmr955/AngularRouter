@@ -22,7 +22,7 @@ export class ProductComponent {
   };
   @Output() addedProduct = new EventEmitter<Product>();
   @Output() showProduct = new EventEmitter<string>();
-
+  imageRandom = `https://picsum.photos/200?random=${Math.floor(Math.random() * 1000)}`;
   constructor() { }
 
   onAddToCart() {

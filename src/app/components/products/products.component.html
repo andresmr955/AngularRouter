@@ -21,7 +21,8 @@
       class="mySwiper"
     >
       <ng-template swiperSlide *ngFor="let img of productChosen.images">
-        <img [src]="img" alt="">
+        <!-- <img [src]="img" alt=""> -->
+        <img [src]="imageRandom" alt="">
       </ng-template>
     </swiper>
     <p>{{ productChosen.description }}</p>
