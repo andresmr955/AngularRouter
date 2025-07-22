@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { StoreService } from '../../services/store.service'
-import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/user.model';
-import { TokenService } from './../../services/token.service';
+import { StoreService } from './../../..//services/store.service'
+import { AuthService } from './../../..//services/auth.service';
+import { User } from './../../../models/user.model';
+import { TokenService } from './../../../services/token.service';
 import { FilesService } from 'src/app/services/files.service';
-import { CategoriesService } from './../../services/categories.service';
+import { CategoriesService } from './../../../services/categories.service';
 import { Category } from 'src/app/models/category.model';
 
 @Component({
