@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SwiperModule } from 'swiper/angular';
+import SwiperCore, { Navigation } from 'swiper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,9 @@ import { CategoryComponent } from './pages/category/category.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+
+SwiperCore.use([Navigation]);
 
 @NgModule({
   declarations: [
@@ -34,7 +38,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     HomeComponent,
     CategoryComponent, 
     RegisterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ProductDetailComponent
 
   ],
   imports: [
@@ -44,6 +49,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     HttpClientModule,
     FormsModule,
     SwiperModule
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true },

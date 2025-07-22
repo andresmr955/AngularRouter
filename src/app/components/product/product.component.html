@@ -1,6 +1,13 @@
-<app-img *ngIf="product.images.length > 0" [img]="imageRandom"></app-img>
-<h2 class="title">{{ product.price | currency }}</h2>
-<p>{{ product.title }}</p>
-<p class="category">{{ product.category.name }}</p>
-<button (click)="onShowDetail()">Ver detalle</button>
-<button (click)="onAddToCart()">Add cart</button>
+<div class="product-card">
+    <a [routerLink]="['/product', product.id]">
+        <app-img *ngIf="product.images.length > 0" [img]="imageRandom"></app-img>
+    </a>
+
+    <h2 class="title">{{ product.price | currency }}</h2>
+    <p>{{ product.title }}</p>
+    <p class="category">{{ product.category.name }}</p>
+    <!-- <button (click)="onShowDetail()">See details</button> -->
+    <a routerLink="." [queryParams]="{product : product.id}">See details URL</a>
+    <button (click)="onAddToCart()">Add cart</button>
+
+</div>

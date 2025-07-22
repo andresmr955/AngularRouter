@@ -9,7 +9,7 @@ import { switchMap } from 'rxjs';
   // templateUrl: './category.component.html',
 // <!-- <app-products [products]="products" (loadMoreClicked)="onLoadMore()"></app-products> -->
 
-  template: `<app-products [products]="products" ></app-products>`, 
+  template: `<app-products [productId]="productIdCategory" [products]="products" (loadMoreClicked)="onLoadMore()"></app-products>`, 
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent {
@@ -17,10 +17,12 @@ export class CategoryComponent {
   limit = 10;
   offset = 0;
   categoryId: string | null = null;
+  productIdCategory: string | null = null;
 
   constructor(
+    private productsService: ProductsService,
     private route: ActivatedRoute,
-    private productsService: ProductsService  
+
   ){
     
   }
@@ -39,6 +41,20 @@ export class CategoryComponent {
     )
     .subscribe(data => {
       this.products = data
+    });
+
+    this.route.queryParamMap.subscribe(params => {
+      const id = params.get('product');
+      
+      this.productIdCategory = id;
+      console.log('PADRE: productIdCategory =', this.productIdCategory); // 👈 importante
+    });
+  }
+
+  onLoadMore() {
+    this.productsService.getAll(this.limit, this.offset).subscribe((data) => {
+      this.products = this.products.concat(data);
+      this.offset += this.limit;
     });
   }
   

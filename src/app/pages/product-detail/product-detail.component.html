@@ -1,0 +1,25 @@
+
+<div class="page-product">
+  <button  class='back-button' (click)="goToBack(product?.category?.id)">Back</button>
+  <div class="detail" *ngIf="product">
+    <div class="gallery">
+      <swiper [slidesPerView]="1"
+                [spaceBetween]="0"
+                [centeredSlides]="false"
+                 [navigation]="true"
+                [loop]="true"
+                >
+        <!-- <ng-template swiperSlide *ngFor="let img of product?.images"> -->
+        <ng-template swiperSlide *ngFor="let img of productImagesRandom">
+          <img [src]="img" alt="img" />
+        </ng-template>
+      </swiper>
+    </div>
+    <div>
+      <h2>{{ product.title }}</h2>
+      <h3>{{ product.price | currency }}</h3>
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
+</div>
+

@@ -7,3 +7,26 @@ p, h2 {
 .category {
   font-style: italic;
 }
+
+
+.product-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  a{
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  h2.title, p button{
+    margin: 0.3rem 0;
+  }
+
+  button{
+    width: 100%;
+    max-width: 200px;
+  }
+}
+

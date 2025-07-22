@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 import {
   Product,
@@ -20,6 +20,13 @@ export class ProductsComponent{
   @Input() products: Product[] = [];
   @Output() loadMoreClicked = new EventEmitter<void>();
 
+  @Input()
+  set productId(id:string | null){
+    console.log('Input recibido:', id);
+    if(id){
+      this.onShowDetail(id);
+    }
+  }
   showProductDetail = false;
   productChosen: Product | null = null;
  
@@ -34,7 +41,9 @@ export class ProductsComponent{
   }
 
  
-
+  ngOnInit(){
+   
+  }
   onAddToShoppingCart(product: Product) {
     this.storeService.addProduct(product);
     this.total = this.storeService.getTotal();
@@ -47,6 +56,9 @@ export class ProductsComponent{
   onShowDetail(id: string) {
     this.statusDetail = 'loading';
     this.toggleProductDetail();
+    // if(!this.showProductDetail) {
+    //   this.showProductDetail = true;
+    // }
     this.productsService.getOne(id).subscribe(
       (data) => {
         this.productChosen = data;

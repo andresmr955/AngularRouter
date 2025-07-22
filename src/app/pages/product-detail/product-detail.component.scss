@@ -1,0 +1,63 @@
+.page-product {
+  padding: 0 3em;
+  .detail {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    .gallery {
+      overflow: hidden;
+      width: 100%;
+    }
+    h2, h1 {
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 2em;
+    }
+    h2 {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.swiper {
+  width: 100%;
+  height: auto;
+}
+
+.swiper img {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  object-fit: fill; /* o cover, según lo que prefieras */
+}
+
+.back-button {
+  display: inline-block;
+  align-items: center;
+  padding: 0.5rem 1rem; 
+  background-color: #88a87e;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  margin-bottom: 15px;
+
+  &:hover{
+    background-color: #9abb8b;
+  }
+
+  &focus{
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+  }
+
+  &::before{
+    content: '←';
+    margin-right: 0.5rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+}
