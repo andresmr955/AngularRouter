@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 import { Product } from './../../../models/product.model';
 import { switchMap } from 'rxjs';
-import {  } from '../../components/products/products.component';
 
 @Component({
   selector: 'app-category',
@@ -15,10 +14,10 @@ import {  } from '../../components/products/products.component';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent {
-  products: Product[] = [];
   limit = 10;
   offset = 0;
   categoryId: string | null = null;
+  products: Product[] = [];
   productIdCategory: string | null = null;
 
   constructor(

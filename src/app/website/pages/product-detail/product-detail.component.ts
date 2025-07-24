@@ -5,6 +5,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { switchMap, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
