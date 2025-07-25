@@ -15,7 +15,7 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'grid', 
+        path: 'layout', 
         component: GridComponent
       },
       {
