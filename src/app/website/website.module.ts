@@ -7,7 +7,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { WebsiteRoutingModule } from './website-routing.module';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { LayoutComponent } from './components/layout/layout.component';
-
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { LayoutComponent } from './components/layout/layout.component';
         RegisterComponent,
         ProductDetailComponent,
         LayoutComponent,
+        ProfileComponent
         
   ],
   imports: [

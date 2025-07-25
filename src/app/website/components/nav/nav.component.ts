@@ -7,7 +7,8 @@ import { TokenService } from './../../../services/token.service';
 import { FilesService } from 'src/app/services/files.service';
 import { CategoriesService } from './../../../services/categories.service';
 import { Category } from 'src/app/models/category.model';
-
+import { Router } from '@angular/router';
+import { pipe, map } from 'rxjs';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -27,7 +28,8 @@ export class NavComponent implements OnInit {
     private authService: AuthService,
     private tokenService: TokenService, 
     private fileService: FilesService, 
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -35,23 +37,36 @@ export class NavComponent implements OnInit {
       this.counter = products.length;
     });
     this.getAllCategories();
+
+    this.authService.myuser$.subscribe(
+      data => {
+        this.profile = data;
+      }
+    )
   }
 
   toggleMenu() {
     this.activeMenu = !this.activeMenu;
   }
 
-  login() {
-    this.authService.loginAndGet('john@mail.com', 'changeme')
-    .subscribe(user => {
-      this.profile = user;
+  // login() {
+  //   this.authService.loginAndGet('john@mail.com', 'changeme')
+  //   .subscribe(user => {
+  //     this.profile = user;
       
-      const token = this.tokenService.getToken();
-      console.log('Perfil de usuario:', user);
-      console.log('Token de acceso:', token);
+  //     const token = this.tokenService.getToken();
+      
+  //     console.log('Perfil de usuario:', user);
+  //     console.log('Token de acceso:', token);
+  //   });
+  // }
+
+    login() {
+    this.authService.loginAndGet('john@mail.com', 'changeme')
+    .subscribe(() => {
+      this.router.navigate(['/profile']);
     });
   }
-
   downloadPdf() {
   if (this.imgRta) {
     const filename = this.imgRta.split('/').pop() || 'file'; // extrae el nombre del archivo de la URL
@@ -88,4 +103,11 @@ export class NavComponent implements OnInit {
         console.log(this.categories)
       });
     } 
+
+    logout(){
+      
+      this.profile = null
+      this.authService.logout()
+      this.router.navigate(['/home'])
+    }
 }

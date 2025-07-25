@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { TimeInterceptor } from './interceptors/time.interceptor';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NotFoundComponent } from './website/pages/not-found/not-found.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -24,7 +25,8 @@ import { NotFoundComponent } from './website/pages/not-found/not-found.component
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule
     
   ],
   providers: [

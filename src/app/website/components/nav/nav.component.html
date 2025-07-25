@@ -39,20 +39,39 @@
       </ul>
     </nav>
     <div class="info">
+      <div class="file-section">
+  <!-- Descargar PDF -->
+  <div class="download-block">
+    <button (click)="downloadPdf()" class="btn">Download PDF</button>
+  </div>
+
+  <!-- Subir imagen -->
+  <div class="upload-block">
+    <input type="file" (change)="onUpload($event)" class="file-input">
+    <img *ngIf="imgRta" [src]="imgRta" class="preview-img" alt="Preview" />
+  </div>
+</div>
+
       <div class="account">
-        <button *ngIf="!profile; else elseBlock" (click)="login()">Login</button>
-        <ng-template #elseBlock>{{ profile?.email }}</ng-template>
-      </div>
-      <div class="download">
-        <p>
-          <button  (click)="downloadPdf()">download PDF</button>
-        </p>
-        <p>
-          <input type="file" (change)="onUpload($event)">
-          <img *ngIf="imgRta" [src]="imgRta">
-        </p>
-    
-      </div>
+  <!-- Login button cuando no hay perfil -->
+  <button *ngIf="!profile; else elseBlock" (click)="login()" class="login-btn">
+    Login
+  </button>
+
+  
+  <!-- Si hay perfil -->
+  <ng-template #elseBlock>
+    <div class="profile-info">
+      <a routerLink="/profile" class="profile-email">
+        {{ profile?.email }}
+      </a>
+      <button (click)="logout()" class="logout-btn">
+        Logout
+      </button>
+    </div>
+  </ng-template>
+</div>
+      
       <app-register></app-register>
       <div class="cart">
         <a href="">
