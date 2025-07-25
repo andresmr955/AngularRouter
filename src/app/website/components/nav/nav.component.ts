@@ -59,7 +59,7 @@ export class NavComponent implements OnInit {
   //     console.log('Perfil de usuario:', user);
   //     console.log('Token de acceso:', token);
   //   });
-  // }
+  // }'john@mail.com', 'changeme'
 
     login() {
     this.authService.loginAndGet('admin@mail.com', 'admin123')
